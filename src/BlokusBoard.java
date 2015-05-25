@@ -102,9 +102,9 @@ public class BlokusBoard {
 			int yn = g.getY();
 			if(onGrid(g)){
 				if(arr[xn][yn]!=null){
-				if(arr[xn][yn].getColor().equals(c)){
-					return true;
-				}
+					if(arr[xn][yn].getColor().equals(c)){
+						return true;
+					}
 				}
 			}
 		}
