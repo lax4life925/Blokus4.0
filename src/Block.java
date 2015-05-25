@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 
 public class Block {
-
+//test
 	public static final int SIZE = 30;
 	private Color color;
 	private Location relativeLoc;
