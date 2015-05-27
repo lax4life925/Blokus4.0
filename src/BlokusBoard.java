@@ -58,8 +58,6 @@ public class BlokusBoard {
 		}
 		
 		for(Location loc : locList){
-			//I took out the exclamation point to follow how I wrote the methods
-			//you can change the return statements on the methods if you don't like the logic
 			if(this.checkOccupied(loc,c) || this.checkAdjacent(loc,c))
 				return false;
 			if(touchingCorner(loc,c))
@@ -89,7 +87,6 @@ public class BlokusBoard {
 
 	private boolean touchingCorner(Location loc, Color c) {
 		// TODO Auto-generated method stub
-		//I'm assuming this method is for touching corner of your own piece for a valid move??
 		int x = loc.getX();
 		int y = loc.getY();
 		List<Location> locs = new ArrayList<Location>();
@@ -108,12 +105,11 @@ public class BlokusBoard {
 				}
 			}
 		}
-		return true;
+		return false;
 	}
 
 	private boolean checkAdjacent(Location loc, Color c) {
 		// TODO Auto-generated method stub
-		// this is returning true if there is a piece of the same color next to the block
 		int x = loc.getX();
 		int y = loc.getY();
 		List<Location> locs = new ArrayList<Location>();
@@ -138,8 +134,6 @@ public class BlokusBoard {
 	//checks if spot is occupied or off the board
 	//returns true if occupied or off board
 	private boolean checkOccupied(Location loc, Color c) {
-		int x = loc.getX();
-		int y = loc.getY();
 		if(onGrid(loc))
 			if(arr[loc.getX()][loc.getY()]!=null)
 				return true;
