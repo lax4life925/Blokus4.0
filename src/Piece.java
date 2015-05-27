@@ -80,6 +80,7 @@ public abstract class Piece {
 		list.add(new Z4(p));
 		list.add(new FiveLong(p));
 		list.add(new L5(p));
+		list.add(new N(p));
 	}
 
 	public List<Block> getBlockList() {
