@@ -46,11 +46,12 @@ public class BlokusBoard {
 			
 	}
 
-	public boolean validPlay(int xn, int yn, Block b, Piece p) {
+	public boolean validPlay(int xn, int yn, Piece p) {
 		// TODO Auto-generated method stub
 		boolean touchingCorner = false;
 		boolean startingAtRightSpot = false;
-		Color c = b.getColor();
+		Color c = p.getColor();
+		System.out.println(c);
 		List<Location> locList = new ArrayList<Location>();
 		
 		for(Block block : p.getBlockList()){
@@ -99,6 +100,7 @@ public class BlokusBoard {
 			int yn = g.getY();
 			if(onGrid(g)){
 				if(arr[xn][yn]!=null){
+					System.out.print(arr[xn][yn].getColor());
 					if(arr[xn][yn].getColor().equals(c)){
 						return true;
 					}

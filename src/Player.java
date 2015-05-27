@@ -62,4 +62,9 @@ public class Player {
 		// TODO Auto-generated method stub
 		firstMove = false;
 	}
+
+	public boolean playIsPossible() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }
