@@ -131,18 +131,21 @@ public class BlokusPanel extends JPanel{
 
 	public boolean selectPiece(int x, int y) {
 		Player myTurn = whosturn();
-		if(myTurn!=null && myTurn.getAvailablePieces().size() > 0){
-			for(Piece z: myTurn.getAvailablePieces()){
-				for(Block v: z.blockList){
-					if(v.contains(x,y)){
-						firstClick= new Location(x,y);
-						selectedB=v;
-						selectedP=z;
-						return true;
-					}
+		if(myTurn.playIsPossible()){
+			if(myTurn!=null && myTurn.getAvailablePieces().size() > 0){
+				for(Piece z: myTurn.getAvailablePieces()){
+					for(Block v: z.blockList){
+						if(v.contains(x,y)){
+							firstClick= new Location(x,y);
+							selectedP=z;
+							return true;
+						}
+					}	
 				}
 			}
 		}
+		else 
+			nextTurn();
 		return false;
 	}
 
@@ -151,7 +154,7 @@ public class BlokusPanel extends JPanel{
 		Location secondClkBrd = secondClick.convertToGrid();
 		Player myTurn = whosturn();
 		if(board.onGrid(secondClkBrd)){
-			if(board.validPlay(x,y,selectedB,selectedP)){
+			if(board.validPlay(x,y,selectedP)){
 				this.piecesUsed.add(selectedP);
 				for(Block block : selectedP.getBlockList()){
 					board.add(block);
