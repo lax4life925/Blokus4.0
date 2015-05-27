@@ -81,6 +81,12 @@ public abstract class Piece {
 		list.add(new FiveLong(p));
 		list.add(new L5(p));
 		list.add(new N(p));
+		list.add(new P(p));
+		list.add(new U(p));
+		list.add(new Y(p));
+		list.add(new T5(p));
+		list.add(new V5(p));
+		list.add(new W(p));
 	}
 
 	public List<Block> getBlockList() {
