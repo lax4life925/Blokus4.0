@@ -26,7 +26,7 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stubs
-				System.out.println("flip H");
+				//System.out.println("flip H");
 				
 				if(active){
 					panel.getSelectedPiece().flipHorizontally();
@@ -40,7 +40,7 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println("flip V");
+				//System.out.println("flip V");
 
 				if(active){
 					panel.getSelectedPiece().flipVertically();
@@ -54,7 +54,7 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				System.out.println("Rotate");
+				//System.out.println("Rotate");
 				if(active){
 					panel.getSelectedPiece().rotate();
 					panel.repaint();

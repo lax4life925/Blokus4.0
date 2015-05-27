@@ -25,4 +25,8 @@ public Location toScreen() {
 	int ny = (BlokusBoard.VERTICAL_BUFFER) + y*Block.SIZE;
 	return new Location(nx,ny);
 }
+public boolean sameLoc(Location other){
+	
+	return this.getX() == other.getX() && this.getY() == other.getY();
+}
 }

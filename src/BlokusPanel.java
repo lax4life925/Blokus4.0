@@ -154,7 +154,7 @@ public class BlokusPanel extends JPanel{
 		Location secondClkBrd = secondClick.convertToGrid();
 		Player myTurn = whosturn();
 		if(board.onGrid(secondClkBrd)){
-			if(board.validPlay(x,y,selectedP)){
+			if(board.validPlay(selectedP)){
 				this.piecesUsed.add(selectedP);
 				for(Block block : selectedP.getBlockList()){
 					board.add(block);

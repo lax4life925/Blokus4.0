@@ -46,7 +46,7 @@ public class BlokusBoard {
 			
 	}
 
-	public boolean validPlay(int xn, int yn, Piece p) {
+	public boolean validPlay(Piece p) {
 		// TODO Auto-generated method stub
 		boolean touchingCorner = false;
 		boolean startingAtRightSpot = false;
@@ -55,7 +55,10 @@ public class BlokusBoard {
 		List<Location> locList = new ArrayList<Location>();
 		
 		for(Block block : p.getBlockList()){
-			locList.add(block.getScreenLoc().convertToGrid());
+			int x,y;
+			x = block.getScreenLoc().getX() + Block.SIZE/2;
+			y = block.getScreenLoc().getY() + Block.SIZE/2;
+			locList.add(new Location(x,y).convertToGrid());
 		}
 		
 		for(Location loc : locList){
@@ -63,18 +66,13 @@ public class BlokusBoard {
 				return false;
 			if(touchingCorner(loc,c))
 				touchingCorner = true;
+			
 			Player play = p.getPlayer();
 			if(play.firstMove()){
-				if(play.getStartingLocation().getX() == loc.getX() && play.getStartingLocation().getY() == loc.getY())
+				if(play.getStartingLocation().sameLoc(loc))
 					startingAtRightSpot = true;
 			}
-		//	System.out.println("X : " + loc.getX());
-		//	System.out.println("Y : " + loc.getY());
-		//	System.out.print("Play X and Y: " + play.getStartingLocation().getX() + play.getStartingLocation().getY());
-		
-		}
-		
-		if(p.getPlayer().firstMove()){
+		}if(p.getPlayer().firstMove()){
 			if(startingAtRightSpot){
 				System.out.println("Started at right spot");
 				p.getPlayer().firstMoveComplete();
@@ -82,9 +80,10 @@ public class BlokusBoard {
 			}
 			return false;
 		}
-		
 		return touchingCorner;
 	}
+
+
 
 	private boolean touchingCorner(Location loc, Color c) {
 		// TODO Auto-generated method stub
@@ -136,11 +135,15 @@ public class BlokusBoard {
 	//checks if spot is occupied or off the board
 	//returns true if occupied or off board
 	private boolean checkOccupied(Location loc, Color c) {
-		if(onGrid(loc))
+		if(onGrid(loc)){
 			if(arr[loc.getX()][loc.getY()]!=null)
 				return true;
-			
-		return false;
+			else 
+				return false;
+		}
+		else
+			return true;
+	
 	}
 
 	public void add(Block block) {
