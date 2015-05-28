@@ -9,6 +9,7 @@ public class Player {
 
 	private Color color;
 	private int turn;
+	private int score;
 	private List<Piece> usablePieces;
 	private boolean firstMove = true;
 	private Location startingLoc;
@@ -20,7 +21,7 @@ public class Player {
 	//player yellow's turn = 1
 	//player red's turn = 2
 	//player green's turn = 3
-/*	usablePieces = new ArrayList<Piece>();
+	/*	usablePieces = new ArrayList<Piece>();
 	turn = t;
 	color = c;		
 	Piece.fill(usablePieces,this);
@@ -35,7 +36,7 @@ public class Player {
 			break;
 	case 3: startingLoc = new Location(20,20);
 			break;
-			*/
+	 */
 	public Player(Color c, int t, int nP) {
 		// TODO Auto-generated constructor stub
 		usablePieces = new ArrayList<Piece>();
@@ -45,6 +46,7 @@ public class Player {
 
 		startingLoc = new Location(1,1);
 		startingLoc = getStartLoc(t,nP);
+		score = 0;
 	}
 
 	private static Location getStartLoc(int t, int numP) {
@@ -71,7 +73,14 @@ public class Player {
 		// TODO Auto-generated method stub
 		return startingLoc;
 	}
-
+	public int score(){
+		for(Piece p: usablePieces){
+			for(Block b: p.getBlockList()){
+				score--;
+			}
+		}
+		return score;
+	}
 	public void firstMoveComplete() {
 		// TODO Auto-generated method stub
 		firstMove = false;

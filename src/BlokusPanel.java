@@ -102,23 +102,13 @@ public class BlokusPanel extends JPanel{
 		// TODO Auto-generated method stub
 
 	}
-
-	public void addAllPieces(){
-		// we're gonna need to hard code all the pieces individually onto the board I think since
-		// we're doing a separate class for each class...
-		// also that will give us more control when determining each piece's characteristics
-		// all pieces will go into pieces Available list
-	}
-
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 			board.draw(g);
 			if(whosturn() != null)
 				for(Piece p : whosturn().getAvailablePieces()){
 					p.draw(g);
-				}
-		
-		
+				}	
 	}
 	
 
