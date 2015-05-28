@@ -11,11 +11,13 @@ public abstract class Piece {
 	 Color color;
 	 int x;
 	 int y;
+	 Location og;
 	 Player player;
 	public Piece(Player p,int locX, int locY){
 		player = p;
 		x = locX;
 		y = locY;
+		og = new Location(x,y);
 		color = p.getColor();
 	}
 	

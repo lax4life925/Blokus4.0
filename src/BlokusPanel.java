@@ -166,12 +166,12 @@ public class BlokusPanel extends JPanel{
 				}
 				
 				myTurn.getAvailablePieces().remove(selectedP);
-				System.out.println("Valid move");
+				//System.out.println("Valid move");
 				nextTurn();
 			}
 			else{
-				System.out.println("Invalid move");
-				selectedP.follow(firstClick.getX(), firstClick.getY());
+				//System.out.println("Invalid move");
+				selectedP.follow(selectedP.og.getX(), selectedP.og.getY());
 				repaint();
 			}
 		}
@@ -195,6 +195,15 @@ public class BlokusPanel extends JPanel{
 	public void nextTurn() {
 		// TODO Auto-generated method stub
 		this.GameTurn++;
+	}
+	public boolean onScreen(Location loc){
+		int x = loc.getX();
+		int y = loc.getY();
+		int dx = this.getWidth();
+		int dy = this.getHeight();
+		if(x>=0 && x<=dx && y>=0 && y<=dy)
+			return true;
+		return false;
 	}
 
 

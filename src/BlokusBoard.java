@@ -72,7 +72,7 @@ public class BlokusBoard {
 			}
 		}if(p.getPlayer().firstMove()){
 			if(startingAtRightSpot){
-				System.out.println("Started at right spot");
+				//System.out.println("Started at right spot");
 				p.getPlayer().firstMoveComplete();
 				return true;
 			}
@@ -97,7 +97,6 @@ public class BlokusBoard {
 			int yn = g.getY();
 			if(onGrid(g)){
 				if(arr[xn][yn]!=null){
-					System.out.print(arr[xn][yn].getColor());
 					if(arr[xn][yn].getColor().equals(c)){
 						return true;
 					}
