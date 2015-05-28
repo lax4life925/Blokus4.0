@@ -71,7 +71,7 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 
 		panel.getActionMap().put("rotate", rotate);
 		panel.getActionMap().put("flipH", flipH);
-		panel.getActionMap().put("flipH", flipV);
+		panel.getActionMap().put("flipV", flipV);
 
 		
 	}

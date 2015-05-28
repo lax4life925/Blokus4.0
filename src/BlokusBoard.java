@@ -22,8 +22,6 @@ public class BlokusBoard {
 
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		
-		
 		for(int r = 1; r < sizeOfBoard+1; r++){
 			for(int c = 1; c < sizeOfBoard+1; c++){
 				int x = HORIZONTAL_BUFFER + r*Block.SIZE;

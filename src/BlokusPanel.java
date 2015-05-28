@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -15,11 +16,11 @@ public class BlokusPanel extends JPanel{
 	Piece selectedP;
 	Block selectedB;
 	List<Player> playerList = new ArrayList<Player>();
-	 	Player player1;
-		Player player2;
-		Player player3;
-		Player player4;
 	MyListener listen= new MyListener(this);
+	int numPlayers = 0;
+	// true if game has begun
+	boolean playing = false;
+	Color[] colors = {Color.blue,Color.yellow,Color.red,Color.green};
 	//player blue's turn = 0
 	//player yellow's turn = 1
 	//player red's turn = 2
@@ -33,22 +34,35 @@ public class BlokusPanel extends JPanel{
 		setPreferredSize(new Dimension(BlokusFrame.width,BlokusFrame.height));
 		board = new BlokusBoard(this);
 		//setUpTimer();
+		
 		setUpPlayers();
 		//test();
 		//testForPieceFlip();
+		
 	}
-
+	private int getNumPlayers(){
+		return numPlayers;
+	}
 	private void setUpPlayers() {
 		// TODO Auto-generated method stub
-		player1 = new Player(Color.blue,0);
-		player2 = new Player(Color.yellow,1);
-		player3 = new Player(Color.red,2);
-		player4 = new Player(Color.green,3);
-		playerList.add(player1);
-		playerList.add(player2);
-		playerList.add(player3);
-		playerList.add(player4);
+		numPlayers = getNumPlayersInitial();
+		for(int i = 0; i < numPlayers;i++){
+			playerList.add(new Player(colors[i], i,numPlayers));
+		}
+		repaint();
+	}
 
+	private int getNumPlayersInitial() {
+		// TODO Auto-generated method stub
+		JOptionPane jop = new JOptionPane();
+		String s = jop.showInputDialog("How many players?").toString();
+		int x = 0;
+		try {x = Integer.parseInt(s);} catch (NumberFormatException e) {}
+		while(x > 4 || x < 2){
+			s = jop.showInputDialog("Please enter an number between 1 and 4. How many players?");
+			try {x = Integer.parseInt(s);} catch (NumberFormatException e) {}
+		}
+		return x;
 	}
 
 	private void testForPieceFlip() {
@@ -98,28 +112,19 @@ public class BlokusPanel extends JPanel{
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		board.draw(g);
-		if(whosturn() != null)
-			for(Piece p : whosturn().getAvailablePieces()){
-				p.draw(g);
-			}
-		}
+			board.draw(g);
+			if(whosturn() != null)
+				for(Piece p : whosturn().getAvailablePieces()){
+					p.draw(g);
+				}
+		
+		
+	}
 	
 
-	private void test() {
-		// TODO Auto-generated method stub
-		Piece p = new ThreeLong(new Player(Color.red,0), 800, 700);
-		Piece p2 = new Corner(new Player(Color.red,1), 800, 600);
-		Player player1 = new Player(Color.red,3);
-		player1.getAvailablePieces().add(p2);
-		player1.getAvailablePieces().add(p);
-		playerList.add(player1);
-		//piecesAvailable.add(p2);
-		//piecesAvailable.add(p);
-
-	}
+	
 	public Player whosturn(){
-		int x = GameTurn%4;
+		int x = GameTurn%this.getNumPlayers();
 		for(Player z: this.playerList){
 			if(z.getTurn()==x){
 				return z;

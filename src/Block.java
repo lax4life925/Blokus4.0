@@ -10,6 +10,9 @@ public class Block {
 	private Location relativeLoc;
 	private Location screenLoc;
 	private Piece piece;
+	public Block(Color c){
+		color = c;
+	}
 	public Block(Piece p, int relX, int relY) {
 		// TODO Auto-generated constructor stub
 		piece = p;
