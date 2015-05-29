@@ -146,7 +146,7 @@ public class BlokusBoard {
 
 	public void add(Block block) {
 		// TODO Auto-generated method stub
-		Location loc = new Location(block.getScreenLoc().getX() + Block.SIZE/3,block.getScreenLoc().getY() + Block.SIZE/3).convertToGrid();
+		Location loc = new Location(block.getScreenLoc().getX() + Block.SIZE/2,block.getScreenLoc().getY() + Block.SIZE/2).convertToGrid();
 		if(onGrid(loc)){
 		arr[loc.getX()][loc.getY()] = block;
 		}
