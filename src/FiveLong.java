@@ -12,7 +12,7 @@ public class FiveLong extends Piece{
 
 	public FiveLong(Player p) {
 		// TODO Auto-generated constructor stub
-		this(p,BlokusFrame.width-230,BlokusFrame.height-120);
+		this(p,BlokusFrame.width-(BlokusFrame.width*2/7),BlokusFrame.height-120);
 	}
 
 }

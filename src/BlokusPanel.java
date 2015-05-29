@@ -15,6 +15,7 @@ public class BlokusPanel extends JPanel{
 	Location firstClick;
 	Piece selectedP;
 	Block selectedB;
+	PassButton passB;
 	List<Player> playerList = new ArrayList<Player>();
 	MyListener listen= new MyListener(this);
 	int numPlayers = 0;
@@ -33,6 +34,7 @@ public class BlokusPanel extends JPanel{
 		addMouseMotionListener(listen);
 		setPreferredSize(new Dimension(BlokusFrame.width,BlokusFrame.height));
 		board = new BlokusBoard(this);
+		passB = new PassButton(25,25);
 		//setUpTimer();
 		
 		setUpPlayers();
@@ -102,23 +104,16 @@ public class BlokusPanel extends JPanel{
 		// TODO Auto-generated method stub
 
 	}
-
-	public void addAllPieces(){
-		// we're gonna need to hard code all the pieces individually onto the board I think since
-		// we're doing a separate class for each class...
-		// also that will give us more control when determining each piece's characteristics
-		// all pieces will go into pieces Available list
-	}
-
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 			board.draw(g);
+			passB.draw(g);
+			Player myTurn = whosturn();
+			g.drawString("My Score: " + myTurn.getScore(), 25, 100);
 			if(whosturn() != null)
 				for(Piece p : whosturn().getAvailablePieces()){
 					p.draw(g);
-				}
-		
-		
+				}	
 	}
 	
 
@@ -164,21 +159,23 @@ public class BlokusPanel extends JPanel{
 				for(Block block : selectedP.getBlockList()){
 					board.add(block);
 				}
-				
+				if(selectedP.blockList.size()==1 && myTurn.getAvailablePieces().size()==1){
+					myTurn.playedSingleLast();
+				}
 				myTurn.getAvailablePieces().remove(selectedP);
-				System.out.println("Valid move");
+				//System.out.println("Valid move");
 				nextTurn();
 			}
 			else{
-				System.out.println("Invalid move");
-				selectedP.follow(firstClick.getX(), firstClick.getY());
+				//System.out.println("Invalid move");
+				selectedP.follow(selectedP.og.getX(), selectedP.og.getY());
 				repaint();
 			}
 		}
 		firstClick = null;
 		selectedP = null;
 		selectedB = null;
-		return false;
+		return true;
 	}
 
 
@@ -195,6 +192,27 @@ public class BlokusPanel extends JPanel{
 	public void nextTurn() {
 		// TODO Auto-generated method stub
 		this.GameTurn++;
+	}
+	public boolean onScreen(Location loc){
+		int x = loc.getX();
+		int y = loc.getY();
+		int dx = this.getWidth();
+		int dy = this.getHeight();
+		if(x>=0 && x<=dx && y>=0 && y<=dy)
+			return true;
+		return false;
+	}
+	public boolean pass(int x, int y) {
+		// TODO Auto-generated method stub
+		if(passB.contains(x, y)){
+			nextTurn();
+			firstClick = null;
+			selectedP = null;
+			selectedB = null;
+			repaint();
+			return true;
+		}
+		return false;
 	}
 
 

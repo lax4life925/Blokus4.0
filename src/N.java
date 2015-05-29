@@ -12,7 +12,7 @@ public class N extends Piece{
 
 	public N(Player p) {
 		// TODO Auto-generated constructor stub
-		this(p,BlokusFrame.width-230,BlokusFrame.height-250);
+		this(p,BlokusFrame.width-(BlokusFrame.width*2/7),BlokusFrame.height-250);
 	}
 
 }

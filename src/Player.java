@@ -9,8 +9,10 @@ public class Player {
 
 	private Color color;
 	private int turn;
+	private int score;
 	private List<Piece> usablePieces;
 	private boolean firstMove = true;
+	private boolean playedSingleLast = false;
 	private Location startingLoc;
 	private static Location[] fourPlayerStartingLocations = {new Location(1,20),new Location(1,1),new Location(20,1),new Location(20,20)};
 	private static Location[] threePlayerStartingLocations = {};
@@ -20,7 +22,7 @@ public class Player {
 	//player yellow's turn = 1
 	//player red's turn = 2
 	//player green's turn = 3
-/*	usablePieces = new ArrayList<Piece>();
+	/*	usablePieces = new ArrayList<Piece>();
 	turn = t;
 	color = c;		
 	Piece.fill(usablePieces,this);
@@ -35,7 +37,7 @@ public class Player {
 			break;
 	case 3: startingLoc = new Location(20,20);
 			break;
-			*/
+	 */
 	public Player(Color c, int t, int nP) {
 		// TODO Auto-generated constructor stub
 		usablePieces = new ArrayList<Piece>();
@@ -45,6 +47,7 @@ public class Player {
 
 		startingLoc = new Location(1,1);
 		startingLoc = getStartLoc(t,nP);
+		score = Integer.MIN_VALUE;
 	}
 
 	private static Location getStartLoc(int t, int numP) {
@@ -71,14 +74,35 @@ public class Player {
 		// TODO Auto-generated method stub
 		return startingLoc;
 	}
-
+	public int getScore(){
+		if(usablePieces.size()>0){
+			score=0;
+			for(Piece p: usablePieces){
+				for(Block b: p.getBlockList()){
+					score--;
+				}
+			}
+		}
+		if(usablePieces.size()==0){
+			score=0;
+			score+=15;
+		}
+		if(playedSingleLast){
+			score+=5;
+		}
+		return score;
+	}
 	public void firstMoveComplete() {
 		// TODO Auto-generated method stub
 		firstMove = false;
 	}
-
+	public void playedSingleLast(){
+		playedSingleLast=true;
+	}
 	public boolean playIsPossible() {
 		// TODO Auto-generated method stub
+		
 		return true;
 	}
+
 }

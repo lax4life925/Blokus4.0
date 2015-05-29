@@ -12,7 +12,7 @@ public class L4 extends Piece{
 
 	public L4(Player p) {
 		// TODO Auto-generated constructor stub
-		this(p,BlokusFrame.width-400,BlokusFrame.height-400);
+		this(p,BlokusFrame.width-((BlokusFrame.width*2)/5),BlokusFrame.height-400);
 	}
 
 }

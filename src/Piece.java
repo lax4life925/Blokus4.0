@@ -11,11 +11,13 @@ public abstract class Piece {
 	 Color color;
 	 int x;
 	 int y;
+	 Location og;
 	 Player player;
 	public Piece(Player p,int locX, int locY){
 		player = p;
 		x = locX;
 		y = locY;
+		og = new Location(x,y);
 		color = p.getColor();
 	}
 	
@@ -87,6 +89,9 @@ public abstract class Piece {
 		list.add(new T5(p));
 		list.add(new V5(p));
 		list.add(new W(p));
+		list.add(new Z5(p));
+		list.add(new F(p));
+		list.add(new X(p));
 	}
 
 	public List<Block> getBlockList() {

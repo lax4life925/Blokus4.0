@@ -22,6 +22,8 @@ public class BlokusBoard {
 
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
+		
+		
 		for(int r = 1; r < sizeOfBoard+1; r++){
 			for(int c = 1; c < sizeOfBoard+1; c++){
 				int x = HORIZONTAL_BUFFER + r*Block.SIZE;
@@ -49,7 +51,6 @@ public class BlokusBoard {
 		boolean touchingCorner = false;
 		boolean startingAtRightSpot = false;
 		Color c = p.getColor();
-		System.out.println(c);
 		List<Location> locList = new ArrayList<Location>();
 		
 		for(Block block : p.getBlockList()){
@@ -72,7 +73,7 @@ public class BlokusBoard {
 			}
 		}if(p.getPlayer().firstMove()){
 			if(startingAtRightSpot){
-				System.out.println("Started at right spot");
+				//System.out.println("Started at right spot");
 				p.getPlayer().firstMoveComplete();
 				return true;
 			}
@@ -97,7 +98,6 @@ public class BlokusBoard {
 			int yn = g.getY();
 			if(onGrid(g)){
 				if(arr[xn][yn]!=null){
-					System.out.print(arr[xn][yn].getColor());
 					if(arr[xn][yn].getColor().equals(c)){
 						return true;
 					}

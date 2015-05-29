@@ -12,7 +12,7 @@ public class ThreeLong extends Piece{
 
 	public ThreeLong(Player p) {
 		// TODO Auto-generated constructor stub
-		this(p,BlokusFrame.width-400,BlokusFrame.height-200);
+		this(p,BlokusFrame.width-((BlokusFrame.width*2)/5),BlokusFrame.height-200);
 	}
 
 }
