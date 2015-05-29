@@ -12,6 +12,7 @@ public class Player {
 	private int score;
 	private List<Piece> usablePieces;
 	private boolean firstMove = true;
+	public boolean playedSingleLast = false;
 	private Location startingLoc;
 	private static Location[] fourPlayerStartingLocations = {new Location(1,20),new Location(1,1),new Location(20,1),new Location(20,20)};
 	private static Location[] threePlayerStartingLocations = {};
@@ -75,11 +76,18 @@ public class Player {
 	}
 	public int getScore(){
 		if(score==Integer.MIN_VALUE){
+			score=0;
 			for(Piece p: usablePieces){
 				for(Block b: p.getBlockList()){
 					score--;
 				}
 			}
+		}
+		if(usablePieces.size()==0){
+			score+=15;
+		}
+		if(playedSingleLast){
+			score+=5;
 		}
 		return score;
 	}
@@ -91,4 +99,5 @@ public class Player {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
 }

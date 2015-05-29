@@ -154,7 +154,9 @@ public class BlokusPanel extends JPanel{
 				for(Block block : selectedP.getBlockList()){
 					board.add(block);
 				}
-				
+				if(selectedP.blockList.size()==1 && myTurn.getAvailablePieces().size()==1){
+					myTurn.playedSingleLast=true;
+				}
 				myTurn.getAvailablePieces().remove(selectedP);
 				//System.out.println("Valid move");
 				nextTurn();
