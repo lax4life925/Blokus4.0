@@ -18,7 +18,7 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 		panel = bp;
 		setUpKeyActions();
 	}
-	
+
 	private void setUpKeyActions() {
 		// TODO Auto-generated method stub
 		Action flipH = new AbstractAction(){
@@ -27,13 +27,13 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stubs
 				//System.out.println("flip H");
-				
+
 				if(active){
 					panel.getSelectedPiece().flipHorizontally();
 					panel.repaint();
 				}
 			}
-			
+
 		};
 		Action flipV = new AbstractAction(){
 
@@ -47,7 +47,7 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 					panel.repaint();
 				}
 			}
-			
+
 		};
 		Action rotate = new AbstractAction(){
 
@@ -60,9 +60,9 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 					panel.repaint();
 				}
 			}
-		
+
 		};
-		
+
 		panel.getInputMap().put(KeyStroke.getKeyStroke("LEFT"),"flipH");
 		panel.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "flipH");
 		panel.getInputMap().put(KeyStroke.getKeyStroke("UP"), "flipV");
@@ -73,24 +73,26 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 		panel.getActionMap().put("flipH", flipH);
 		panel.getActionMap().put("flipV", flipV);
 
-		
+
 	}
 
 	public void mousePressed(MouseEvent e){
-		
+
 		int x = e.getX();
 		int y = e.getY();
-			if(panel.firstClick==null){
-				if(panel.selectPiece(x,y))
-					active = true;
-			}
-			else if(panel.firstClick!=null){
-				panel.dropPiece(x, y);
-				active = false;
-				panel.firstClick = null;
+		if(panel.firstClick==null){
+			if(panel.selectPiece(x,y))
+				active = true;
+		}
+		else if(panel.firstClick!=null){
+			panel.dropPiece(x, y);
+			active = false;
+			panel.firstClick = null;
+		}
+		if(panel.pass(x,y)){
 		}
 	}
-	
+
 	public void mouseMoved(MouseEvent e){
 		if(active){
 			panel.getSelectedPiece().follow(e.getX(),e.getY());
@@ -102,5 +104,5 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 	}
-	
+
 }

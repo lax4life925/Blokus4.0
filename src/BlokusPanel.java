@@ -15,6 +15,7 @@ public class BlokusPanel extends JPanel{
 	Location firstClick;
 	Piece selectedP;
 	Block selectedB;
+	PassButton passB;
 	List<Player> playerList = new ArrayList<Player>();
 	MyListener listen= new MyListener(this);
 	int numPlayers = 0;
@@ -33,6 +34,7 @@ public class BlokusPanel extends JPanel{
 		addMouseMotionListener(listen);
 		setPreferredSize(new Dimension(BlokusFrame.width,BlokusFrame.height));
 		board = new BlokusBoard(this);
+		passB = new PassButton(25,25);
 		//setUpTimer();
 		
 		setUpPlayers();
@@ -105,6 +107,7 @@ public class BlokusPanel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 			board.draw(g);
+			passB.draw(g);
 			if(whosturn() != null)
 				for(Piece p : whosturn().getAvailablePieces()){
 					p.draw(g);
@@ -170,7 +173,7 @@ public class BlokusPanel extends JPanel{
 		firstClick = null;
 		selectedP = null;
 		selectedB = null;
-		return false;
+		return true;
 	}
 
 
@@ -196,6 +199,17 @@ public class BlokusPanel extends JPanel{
 		if(x>=0 && x<=dx && y>=0 && y<=dy)
 			return true;
 		return false;
+	}
+	public boolean pass(int x, int y) {
+		// TODO Auto-generated method stub
+		if(passB.contains(x, y)){
+			nextTurn();
+			firstClick = null;
+			selectedP = null;
+			selectedB = null;
+			repaint();
+		}
+		return true;
 	}
 
 
