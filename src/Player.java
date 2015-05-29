@@ -75,7 +75,7 @@ public class Player {
 		return startingLoc;
 	}
 	public int getScore(){
-		if(score==Integer.MIN_VALUE){
+		if(usablePieces.size()>0){
 			score=0;
 			for(Piece p: usablePieces){
 				for(Block b: p.getBlockList()){
@@ -84,6 +84,7 @@ public class Player {
 			}
 		}
 		if(usablePieces.size()==0){
+			score=0;
 			score+=15;
 		}
 		if(playedSingleLast){

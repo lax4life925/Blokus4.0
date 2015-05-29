@@ -108,6 +108,8 @@ public class BlokusPanel extends JPanel{
 		super.paintComponent(g);
 			board.draw(g);
 			passB.draw(g);
+			Player myTurn = whosturn();
+			g.drawString("My Score: " + myTurn.getScore(), 25, 100);
 			if(whosturn() != null)
 				for(Piece p : whosturn().getAvailablePieces()){
 					p.draw(g);
@@ -208,8 +210,9 @@ public class BlokusPanel extends JPanel{
 			selectedP = null;
 			selectedB = null;
 			repaint();
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 
