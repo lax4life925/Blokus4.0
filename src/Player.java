@@ -46,7 +46,7 @@ public class Player {
 
 		startingLoc = new Location(1,1);
 		startingLoc = getStartLoc(t,nP);
-		score = 0;
+		score = Integer.MIN_VALUE;
 	}
 
 	private static Location getStartLoc(int t, int numP) {
@@ -73,10 +73,12 @@ public class Player {
 		// TODO Auto-generated method stub
 		return startingLoc;
 	}
-	public int score(){
-		for(Piece p: usablePieces){
-			for(Block b: p.getBlockList()){
-				score--;
+	public int getScore(){
+		if(score==Integer.MIN_VALUE){
+			for(Piece p: usablePieces){
+				for(Block b: p.getBlockList()){
+					score--;
+				}
 			}
 		}
 		return score;
@@ -85,7 +87,6 @@ public class Player {
 		// TODO Auto-generated method stub
 		firstMove = false;
 	}
-
 	public boolean playIsPossible() {
 		// TODO Auto-generated method stub
 		return true;

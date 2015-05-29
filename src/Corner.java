@@ -11,6 +11,6 @@ public class Corner extends Piece {
 
 	public Corner(Player p) {
 		// TODO Auto-generated constructor stub
-		this(p,BlokusFrame.width-400,BlokusFrame.height-150);
+		this(p,BlokusFrame.width-((BlokusFrame.width*2)/5),BlokusFrame.height-150);
 	}
 }

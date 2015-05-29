@@ -11,7 +11,7 @@ public class T4 extends Piece{
 
 	public T4(Player p) {
 		// TODO Auto-generated constructor stub
-		this(p,BlokusFrame.width-400,BlokusFrame.height-475);
+		this(p,BlokusFrame.width-((BlokusFrame.width*2)/5),BlokusFrame.height-475);
 	}
 
 }
