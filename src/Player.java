@@ -14,10 +14,7 @@ public class Player {
 	private boolean firstMove = true;
 	private boolean playedSingleLast = false;
 	private Location startingLoc;
-	private static Location[] fourPlayerStartingLocations = {new Location(1,20),new Location(1,1),new Location(20,1),new Location(20,20)};
-	private static Location[] threePlayerStartingLocations = {};
-	private static Location[] twoPlayerStartingLocations = {new Location(5,5),new Location(15,15)};
-	private static Location[][] startingLocations ={twoPlayerStartingLocations,threePlayerStartingLocations,fourPlayerStartingLocations};
+	private static Location[] startingLocations = {new Location(1,20),new Location(1,1),new Location(20,1),new Location(20,20)};
 	//player blue's turn = 0
 	//player yellow's turn = 1
 	//player red's turn = 2
@@ -46,13 +43,13 @@ public class Player {
 		Piece.fill(usablePieces,this);
 
 		startingLoc = new Location(1,1);
-		startingLoc = getStartLoc(t,nP);
+		startingLoc = getStartLoc(t);
 		score = Integer.MIN_VALUE;
 	}
 
-	private static Location getStartLoc(int t, int numP) {
+	private static Location getStartLoc(int t) {
 		// TODO Auto-generated method stub
-		return startingLocations[numP-2][t];
+		return startingLocations[t];
 	}
 
 	public Color getColor() {
