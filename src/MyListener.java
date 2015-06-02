@@ -89,8 +89,7 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 			active = false;
 			panel.firstClick = null;
 		}
-		if(panel.pass(x,y)){
-		}
+		
 	}
 
 	public void mouseMoved(MouseEvent e){

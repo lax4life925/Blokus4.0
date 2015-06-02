@@ -1,9 +1,12 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -16,9 +19,10 @@ public class BlokusPanel extends JPanel{
 	Piece selectedP;
 	Block selectedB;
 	PassButton passB;
+	JButton passButton;
 	List<Player> playerList = new ArrayList<Player>();
 	MyListener listen= new MyListener(this);
-	int numPlayers = 0;
+	int numPlayers = 4;
 	// true if game has begun
 	boolean playing = false;
 	Color[] colors = {Color.blue,Color.yellow,Color.red,Color.green};
@@ -34,7 +38,21 @@ public class BlokusPanel extends JPanel{
 		addMouseMotionListener(listen);
 		setPreferredSize(new Dimension(BlokusFrame.width,BlokusFrame.height));
 		board = new BlokusBoard(this);
-		passB = new PassButton(25,25);
+		passButton = new JButton();
+		passButton.setSize(25, 25);
+		passButton.setText("Pass");
+		passButton.setFocusable(false);
+		passButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				pass();
+				
+			}
+			
+		});
+		this.add(passButton);
 		//setUpTimer();
 		
 		setUpPlayers();
@@ -47,7 +65,7 @@ public class BlokusPanel extends JPanel{
 	}
 	private void setUpPlayers() {
 		// TODO Auto-generated method stub
-		numPlayers = getNumPlayersInitial();
+		//numPlayers = getNumPlayersInitial();
 		for(int i = 0; i < numPlayers;i++){
 			playerList.add(new Player(colors[i], i,numPlayers));
 		}
@@ -107,7 +125,7 @@ public class BlokusPanel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 			board.draw(g);
-			passB.draw(g);
+			//passB.draw(g);
 			Player myTurn = whosturn();
 			g.drawString("My Score: " + myTurn.getScore(), 25, 100);
 			if(whosturn() != null)
@@ -202,17 +220,19 @@ public class BlokusPanel extends JPanel{
 			return true;
 		return false;
 	}
-	public boolean pass(int x, int y) {
+	public void pass() {
 		// TODO Auto-generated method stub
-		if(passB.contains(x, y)){
+		
 			nextTurn();
 			firstClick = null;
 			selectedP = null;
 			selectedB = null;
 			repaint();
-			return true;
-		}
-		return false;
+		
+	}
+	public void setNumPlayers(int n) {
+		// TODO Auto-generated method stub
+		this.numPlayers = n;
 	}
 
 
