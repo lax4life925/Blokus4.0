@@ -6,20 +6,198 @@ import java.util.List;
 import javax.swing.JComponent;
 
 
-public abstract class Piece {
+public class Piece {
 	List<Block> blockList = new ArrayList<Block>();
 	 Color color;
 	 int x;
 	 int y;
 	 Location og;
+	 String t;
 	 Player player;
-	public Piece(Player p,int locX, int locY){
-		player = p;
-		x = locX;
-		y = locY;
-		og = new Location(x,y);
-		color = p.getColor();
-	}
+	 
+	 public Piece(Player p, String type){
+			player = p;
+			color = p.getColor();
+			t = type; 
+			makeBlocks(type);
+		}
+	 
+	 private void makeBlocks(String type) {
+		 
+		 	if (type == "Corner"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 0, 1));
+				blockList.add(new Block(this, 1, 0));
+				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
+				y=BlokusFrame.height-150;
+		 	}
+			if (type == "T4"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 2, 0));
+				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
+				y=BlokusFrame.height-475;
+			}
+			if (type == "Square"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 0, -1));
+				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
+				y=BlokusFrame.height-550;
+			}
+			if (type == "ThreeLong"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 2, 0));
+				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
+				y=BlokusFrame.height-200;
+			}
+			if (type == "FourLong"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 2, 0));
+				blockList.add(new Block(this, 3, 0));
+				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
+				y=BlokusFrame.height-250;
+			}
+			if (type == "OneLong"){
+				blockList.add(new Block(this, 0, 0));
+				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
+				y=BlokusFrame.height-300;
+			}
+			if (type == "TwoLong"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, 0));
+				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
+				y=BlokusFrame.height-350;
+			}
+			if (type == "L4"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 0, -1));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 2, 0));
+				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
+				y=BlokusFrame.height-400;
+			}
+			if (type == "Z4"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 2, -1));
+				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
+				y=BlokusFrame.height-625;
+			}
+			if (type == "FiveLong"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 2, 0));
+				blockList.add(new Block(this, 3, 0));
+				blockList.add(new Block(this, 4, 0));
+				x=BlokusFrame.width-(BlokusFrame.width*2/7);
+				y=BlokusFrame.height-120;
+			}
+			if (type == "L5"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 2, 0));
+				blockList.add(new Block(this, 3, 0));
+				blockList.add(new Block(this, 0, -1));
+				x=BlokusFrame.width-(BlokusFrame.width*2/7);
+				y=BlokusFrame.height-170;
+			}
+			if (type == "U"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 0, -1));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 2, -1));
+				blockList.add(new Block(this, 2, 0));
+				x=BlokusFrame.width-(BlokusFrame.width*2/7);
+				y=BlokusFrame.height-410;
+			}
+			if (type == "F"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 0, -1));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 1, -2));
+				blockList.add(new Block(this, 2, -1));
+				x=BlokusFrame.width-(BlokusFrame.width*2/15);
+				y=BlokusFrame.height-230;
+			}
+			if (type == "P"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 2, 0));
+				blockList.add(new Block(this, 2, -1));
+				blockList.add(new Block(this, 1, -1));
+				x=BlokusFrame.width-(BlokusFrame.width*2/7);
+				y=BlokusFrame.height-330;
+			}
+			if (type == "V5"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 0, -1));
+				blockList.add(new Block(this, 0, -2));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 2, 0));
+				x=BlokusFrame.width-(BlokusFrame.width*2/7);
+				y=BlokusFrame.height-680;
+			}
+			if (type == "W"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 2, -1));
+				blockList.add(new Block(this, 2, -2));
+				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
+				y=BlokusFrame.height-700;
+			}
+			if (type == "Y"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 2, 0));
+				blockList.add(new Block(this, 3, 0));
+				x=BlokusFrame.width-(BlokusFrame.width*2/7);
+				y=BlokusFrame.height-490;
+			}
+			if (type == "N"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 2, -1));
+				blockList.add(new Block(this, 3, -1));
+				x=BlokusFrame.width-(BlokusFrame.width*2/7);
+				y=BlokusFrame.height-250;
+			}
+			if (type == "X"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 1, 1));
+				blockList.add(new Block(this, 2, 0));
+				blockList.add(new Block(this, 1, 0));
+				x=BlokusFrame.width-(BlokusFrame.width*2/15);
+				y=BlokusFrame.height-370;
+			}
+			if (type == "Z5"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 1, 0));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 1, -2));
+				blockList.add(new Block(this, 2, -2));
+				x=BlokusFrame.width-(BlokusFrame.width*2/15);
+				y=BlokusFrame.height-120;
+			}
+			if (type == "T5"){
+				blockList.add(new Block(this, 0, 0));
+				blockList.add(new Block(this, 0, -1));
+				blockList.add(new Block(this, 0, -2));
+				blockList.add(new Block(this, 1, -1));
+				blockList.add(new Block(this, 2, -1));
+				x=BlokusFrame.width-(BlokusFrame.width*2/7);
+				y=BlokusFrame.height-570;
+			}
+		}
 	
 	public void flipVertically(){
 		for(Block b : blockList){
@@ -67,31 +245,6 @@ public abstract class Piece {
 	public void setLoc(int xx, int yy){
 		x = xx;
 		y = yy;
-	}
-
-	public static void fill(List<Piece> list, Player p) {
-		// TODO Auto-generated method stub
-		list.add(new Corner(p));
-		list.add(new ThreeLong(p));
-		list.add(new FourLong(p));
-		list.add(new OneLong(p));
-		list.add(new TwoLong(p));
-		list.add(new L4(p));
-		list.add(new T4(p));
-		list.add(new Square(p));
-		list.add(new Z4(p));
-		list.add(new FiveLong(p));
-		list.add(new L5(p));
-		list.add(new N(p));
-		list.add(new P(p));
-		list.add(new U(p));
-		list.add(new Y(p));
-		list.add(new T5(p));
-		list.add(new V5(p));
-		list.add(new W(p));
-		list.add(new Z5(p));
-		list.add(new F(p));
-		list.add(new X(p));
 	}
 
 	public List<Block> getBlockList() {

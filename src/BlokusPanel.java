@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +15,7 @@ import javax.swing.JPanel;
 
 public class BlokusPanel extends JPanel{
 	BlokusBoard board;
-	private int GameTurn=4;
+	private int GameTurn=0;
 	Location firstClick;
 	Piece selectedP;
 	Block selectedB;
@@ -32,8 +33,11 @@ public class BlokusPanel extends JPanel{
 	//player green's turn = 3
 	List<Piece> piecesAvailable = new ArrayList<Piece>();
 	List<Piece> piecesUsed = new ArrayList<Piece>();
-	public BlokusPanel(){
+	private List<String> playerNames;
+	public BlokusPanel(List<String> pn){
 		super();
+		playerNames = pn;
+		this.numPlayers = pn.size();
 		this.addMouseListener(listen);
 		addMouseMotionListener(listen);
 		setPreferredSize(new Dimension(BlokusFrame.width,BlokusFrame.height));
@@ -67,7 +71,7 @@ public class BlokusPanel extends JPanel{
 		// TODO Auto-generated method stub
 		//numPlayers = getNumPlayersInitial();
 		for(int i = 0; i < numPlayers;i++){
-			playerList.add(new Player(colors[i], i,numPlayers));
+			playerList.add(new Player(colors[i], i, numPlayers));
 		}
 		repaint();
 	}
@@ -85,38 +89,6 @@ public class BlokusPanel extends JPanel{
 		return x;
 	}
 
-	private void testForPieceFlip() {
-		// TODO Auto-generated method stub
-		Piece p = new Corner(playerList.get(0),10,10);
-		int i = 1;
-		for(Block b : p.blockList){
-			int x = b.getRelativeLoc().getX();
-			int y = b.getRelativeLoc().getY();
-			System.out.println("Block " + i + " x: " + x + " y: " + y);
-			
-			
-		}
-		
-		p.flipHorizontally();
-		System.out.println("Flipped horizontally");
-		for(Block b : p.blockList){
-			int x = b.getRelativeLoc().getX();
-			int y = b.getRelativeLoc().getY();
-			System.out.println("Block " + i + " x: " + x + " y: " + y);
-			
-			
-		}
-		p.flipHorizontally();
-		p.flipVertically();
-		System.out.println("Flipped Vertically");
-		for(Block b : p.blockList){
-			int x = b.getRelativeLoc().getX();
-			int y = b.getRelativeLoc().getY();
-			System.out.println("Block " + i + " x: " + x + " y: " + y);
-			
-			
-		}
-	}
 
 	private void setUpTimer() {
 		// TODO Auto-generated method stub
@@ -127,19 +99,20 @@ public class BlokusPanel extends JPanel{
 			board.draw(g);
 			//passB.draw(g);
 			Player myTurn = whosturn();
-			g.drawString("My Score: " + myTurn.getScore(), 25, 100);
-			if(whosturn() != null)
+			
+			g.drawString(this.playerNames.get(GameTurn) + "'s Score: " + myTurn.getScore(), 25, 100);
+			if(whosturn() != null){
 				for(Piece p : whosturn().getAvailablePieces()){
 					p.draw(g);
 				}	
+			}
 	}
 	
 
 	
 	public Player whosturn(){
-		int x = GameTurn%this.getNumPlayers();
 		for(Player z: this.playerList){
-			if(z.getTurn()==x){
+			if(z.getTurn()==GameTurn){
 				return z;
 			}
 		}
@@ -210,6 +183,7 @@ public class BlokusPanel extends JPanel{
 	public void nextTurn() {
 		// TODO Auto-generated method stub
 		this.GameTurn++;
+		GameTurn = GameTurn%this.numPlayers;
 	}
 	public boolean onScreen(Location loc){
 		int x = loc.getX();
@@ -230,10 +204,7 @@ public class BlokusPanel extends JPanel{
 			repaint();
 		
 	}
-	public void setNumPlayers(int n) {
-		// TODO Auto-generated method stub
-		this.numPlayers = n;
-	}
+	
 
 
 

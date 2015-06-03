@@ -1,15 +1,20 @@
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 
 
 public class BlokusMenu extends JPanel{
@@ -18,10 +23,19 @@ private JTextField jtf;
 private JButton enter;
 private JButton done;
 private List<String> playerNames;
-int i = 0;
+private int numPlayers = 0;
 private BlokusFrame blokF;
+private Image blokusPic;
 	public BlokusMenu(BlokusFrame bf){
 		super();
+		this.setPreferredSize(new Dimension(500,500));
+		try {
+		    InputStream is = new BufferedInputStream(new FileInputStream("Blokus.jpg"));
+		    blokusPic = ImageIO.read(is);
+		    JLabel pic = new JLabel(new ImageIcon(blokusPic));
+			this.add(pic);
+			} catch (IOException ex) {}
+		
 		blokF = bf;
 		enter = new JButton();
 		enter.setText("Enter");
@@ -30,12 +44,12 @@ private BlokusFrame blokF;
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				playerNames.add(jtf.getText());
-				i++;
-				
-				if(i == 3){
-					blokF.addPanel(i+1);
-					removeAllTheShit();
+				numPlayers++;
+				if(numPlayers == 4){
+					doneAddingPlayers();
 				}
+				else
+					repaint();
 			}
 		});
 		
@@ -49,8 +63,7 @@ private BlokusFrame blokF;
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				blokF.addPanel(i+1);
-				removeAllTheShit();
+				doneAddingPlayers();
 			}
 			
 		});
@@ -58,9 +71,19 @@ private BlokusFrame blokF;
 		this.add(jtf,1);
 		this.add(done,2);
 	}
-	protected void removeAllTheShit() {
+	protected void doneAddingPlayers() {
 		// TODO Auto-generated method stub
+		blokF.recievePlayerList(this.playerNames);
 		this.removeAll();
+	}
+	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		for(int a = 0; a < this.playerNames.size();a++){
+			String str = "Player ";
+			str+= ((a+1) + " : " + this.playerNames.get(a));
+			g.drawString(str, 20, 50+20*(a+1));
+		}
 	}
 
 }
