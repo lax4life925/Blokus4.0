@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Location {
 private int x;
@@ -28,5 +31,23 @@ public Location toScreen() {
 public boolean sameLoc(Location other){
 	
 	return this.getX() == other.getX() && this.getY() == other.getY();
+}
+public List<Location> getCorners(){
+	List<Location> temp = new ArrayList<Location>();
+	temp.add(new Location(this.getX()+1,this.getY()+1));
+	temp.add(new Location(this.getX()+1,this.getY()-1));
+	temp.add(new Location(this.getX()-1,this.getY()+1));
+	temp.add(new Location(this.getX()-1,this.getY()-1));
+
+	return temp;
+}
+public List<Location> getAdjacents(){
+	List<Location> temp = new ArrayList<Location>();
+	temp.add(new Location(this.getX()+1,this.getY()));
+	temp.add(new Location(this.getX()-1,this.getY()));
+	temp.add(new Location(this.getX(),this.getY()+1));
+	temp.add(new Location(this.getX(),this.getY()-1));
+
+	return temp;
 }
 }

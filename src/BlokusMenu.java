@@ -30,6 +30,7 @@ private Image blokusPic;
 		super();
 		this.setPreferredSize(new Dimension(500,500));
 		try {
+			System.out.print("test");
 		    InputStream is = new BufferedInputStream(new FileInputStream("Blokus.jpg"));
 		    blokusPic = ImageIO.read(is);
 		    JLabel pic = new JLabel(new ImageIcon(blokusPic));

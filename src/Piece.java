@@ -272,4 +272,16 @@ public class Piece {
 		return player;
 	}
 
+	public List<Location> getRelativeLocationOfCorners(){
+		List<Location> temp = new ArrayList<Location>();
+		for(Block b : this.getBlockList()){
+			Location l = b.getRelativeLoc();
+		}
+		
+		
+		
+		
+		
+		return temp;
+	}
 }
