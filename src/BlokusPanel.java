@@ -1,9 +1,13 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -11,14 +15,15 @@ import javax.swing.JPanel;
 
 public class BlokusPanel extends JPanel{
 	BlokusBoard board;
-	private int GameTurn=4;
+	private int GameTurn=0;
 	Location firstClick;
 	Piece selectedP;
 	Block selectedB;
 	PassButton passB;
+	JButton passButton;
 	List<Player> playerList = new ArrayList<Player>();
 	MyListener listen= new MyListener(this);
-	int numPlayers = 0;
+	int numPlayers = 4;
 	// true if game has begun
 	boolean playing = false;
 	Color[] colors = {Color.blue,Color.yellow,Color.red,Color.green};
@@ -28,13 +33,30 @@ public class BlokusPanel extends JPanel{
 	//player green's turn = 3
 	List<Piece> piecesAvailable = new ArrayList<Piece>();
 	List<Piece> piecesUsed = new ArrayList<Piece>();
-	public BlokusPanel(){
+	private List<String> playerNames;
+	public BlokusPanel(List<String> pn){
 		super();
+		playerNames = pn;
+		this.numPlayers = pn.size();
 		this.addMouseListener(listen);
 		addMouseMotionListener(listen);
 		setPreferredSize(new Dimension(BlokusFrame.width,BlokusFrame.height));
 		board = new BlokusBoard(this);
-		passB = new PassButton(25,25);
+		passButton = new JButton();
+		passButton.setSize(25, 25);
+		passButton.setText("Pass");
+		passButton.setFocusable(false);
+		passButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				pass();
+				
+			}
+			
+		});
+		this.add(passButton);
 		//setUpTimer();
 		
 		setUpPlayers();
@@ -47,9 +69,9 @@ public class BlokusPanel extends JPanel{
 	}
 	private void setUpPlayers() {
 		// TODO Auto-generated method stub
-		numPlayers = getNumPlayersInitial();
+		//numPlayers = getNumPlayersInitial();
 		for(int i = 0; i < numPlayers;i++){
-			playerList.add(new Player(colors[i], i,numPlayers));
+			playerList.add(new Player(colors[i], i, numPlayers));
 		}
 		repaint();
 	}
@@ -67,38 +89,6 @@ public class BlokusPanel extends JPanel{
 		return x;
 	}
 
-	private void testForPieceFlip() {
-		// TODO Auto-generated method stub
-		Piece p = new Corner(playerList.get(0),10,10);
-		int i = 1;
-		for(Block b : p.blockList){
-			int x = b.getRelativeLoc().getX();
-			int y = b.getRelativeLoc().getY();
-			System.out.println("Block " + i + " x: " + x + " y: " + y);
-			
-			
-		}
-		
-		p.flipHorizontally();
-		System.out.println("Flipped horizontally");
-		for(Block b : p.blockList){
-			int x = b.getRelativeLoc().getX();
-			int y = b.getRelativeLoc().getY();
-			System.out.println("Block " + i + " x: " + x + " y: " + y);
-			
-			
-		}
-		p.flipHorizontally();
-		p.flipVertically();
-		System.out.println("Flipped Vertically");
-		for(Block b : p.blockList){
-			int x = b.getRelativeLoc().getX();
-			int y = b.getRelativeLoc().getY();
-			System.out.println("Block " + i + " x: " + x + " y: " + y);
-			
-			
-		}
-	}
 
 	private void setUpTimer() {
 		// TODO Auto-generated method stub
@@ -107,21 +97,22 @@ public class BlokusPanel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 			board.draw(g);
-			passB.draw(g);
+			//passB.draw(g);
 			Player myTurn = whosturn();
-			g.drawString("My Score: " + myTurn.getScore(), 25, 100);
-			if(whosturn() != null)
+			
+			g.drawString(this.playerNames.get(GameTurn) + "'s Score: " + myTurn.getScore(), 25, 100);
+			if(whosturn() != null){
 				for(Piece p : whosturn().getAvailablePieces()){
 					p.draw(g);
 				}	
+			}
 	}
 	
 
 	
 	public Player whosturn(){
-		int x = GameTurn%this.getNumPlayers();
 		for(Player z: this.playerList){
-			if(z.getTurn()==x){
+			if(z.getTurn()==GameTurn){
 				return z;
 			}
 		}
@@ -192,6 +183,7 @@ public class BlokusPanel extends JPanel{
 	public void nextTurn() {
 		// TODO Auto-generated method stub
 		this.GameTurn++;
+		GameTurn = GameTurn%this.numPlayers;
 	}
 	public boolean onScreen(Location loc){
 		int x = loc.getX();
@@ -202,18 +194,17 @@ public class BlokusPanel extends JPanel{
 			return true;
 		return false;
 	}
-	public boolean pass(int x, int y) {
+	public void pass() {
 		// TODO Auto-generated method stub
-		if(passB.contains(x, y)){
+		
 			nextTurn();
 			firstClick = null;
 			selectedP = null;
 			selectedB = null;
 			repaint();
-			return true;
-		}
-		return false;
+		
 	}
+	
 
 
 

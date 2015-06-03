@@ -13,6 +13,7 @@ public class Player {
 	private List<Piece> usablePieces;
 	private boolean firstMove = true;
 	private boolean playedSingleLast = false;
+	
 	private Location startingLoc;
 	private static Location[] startingLocations = {new Location(1,20),new Location(1,1),new Location(20,1),new Location(20,20)};
 	//player blue's turn = 0
@@ -39,9 +40,9 @@ public class Player {
 		// TODO Auto-generated constructor stub
 		usablePieces = new ArrayList<Piece>();
 		turn = t;
-		color = c;		
-		Piece.fill(usablePieces,this);
-
+		color = c;	
+		PieceBag pb = new PieceBag(this);
+		usablePieces = pb.getPieces();
 		startingLoc = new Location(1,1);
 		startingLoc = getStartLoc(t);
 		score = Integer.MIN_VALUE;

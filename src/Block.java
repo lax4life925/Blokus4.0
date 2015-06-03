@@ -43,12 +43,14 @@ public class Block {
 	}
 
 
+
 	public boolean contains(int x, int y) {
 		// TODO Auto-generated method stub
-		Rectangle rect = new Rectangle(screenLoc.getX(),screenLoc.getY(),SIZE,SIZE);
+		Rectangle rect = new Rectangle(getRelativeLoc().getX()*Block.SIZE + piece.getX(),getRelativeLoc().getY()*Block.SIZE + piece.getY(),SIZE,SIZE);
+		//System.out.println("Testing: "+getRelativeLoc().getX()*Block.SIZE + piece.getX()+" "+getRelativeLoc().getY()*Block.SIZE + piece.getY()+" "+SIZE);
 		return rect.contains(x, y);
-			
 	}
+
 
 	public void setScreenLoc(Location screen) {
 		// TODO Auto-generated method stub
