@@ -25,13 +25,14 @@ private JButton done;
 private List<String> playerNames;
 private int numPlayers = 0;
 private BlokusFrame blokF;
+private Image blokusPic;
 	public BlokusMenu(BlokusFrame bf){
 		super();
 		this.setPreferredSize(new Dimension(500,500));
 		try {
-			//System.out.print("test");
+			System.out.print("test");
 		    InputStream is = new BufferedInputStream(new FileInputStream("Blokus.jpg"));
-		    Image blokusPic = ImageIO.read(is);
+		    blokusPic = ImageIO.read(is);
 		    JLabel pic = new JLabel(new ImageIcon(blokusPic));
 			this.add(pic);
 			} catch (IOException ex) {}

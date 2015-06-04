@@ -50,8 +50,4 @@ public List<Location> getAdjacents(){
 
 	return temp;
 }
-public String toString(){
-	return "Location x: " + this.getX() + " Location y: " + this.getY();
-	
-}
 }

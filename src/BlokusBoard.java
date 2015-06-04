@@ -61,10 +61,8 @@ public class BlokusBoard {
 		}
 		
 		for(Location loc : locList){
-			
-			if(!onGrid(loc) || this.checkOccupied(loc) || this.checkAdjacent(loc,c))
+			if(this.checkOccupied(loc,c) || this.checkAdjacent(loc,c))
 				return false;
-			
 			if(touchingCorner(loc,c))
 				touchingCorner = true;
 			
@@ -88,33 +86,61 @@ public class BlokusBoard {
 
 	private boolean touchingCorner(Location loc, Color c) {
 		// TODO Auto-generated method stub
-		
-		for(Location location : loc.getCorners()){
-			Block b = arr[location.getX()][location.getY()];
-			if(b != null && b.getColor().equals(c))
-				return true;
+		int x = loc.getX();
+		int y = loc.getY();
+		List<Location> locs = new ArrayList<Location>();
+		locs.add(new Location (x+1,y+1));
+		locs.add(new Location (x-1, y+1));
+		locs.add(new Location (x-1, y-1));
+		locs.add(new Location (x+1, y-1));
+		for(Location g: locs){
+			int xn = g.getX();
+			int yn = g.getY();
+			if(onGrid(g)){
+				if(arr[xn][yn]!=null){
+					if(arr[xn][yn].getColor().equals(c)){
+						return true;
+					}
+				}
+			}
 		}
 		return false;
 	}
 
-	public boolean checkAdjacent(Location loc, Color c) {
+	private boolean checkAdjacent(Location loc, Color c) {
 		// TODO Auto-generated method stub
-		for(Location location : loc.getAdjacents()){
-			Block b = arr[location.getX()][location.getY()];
-			if(b != null && b.getColor().equals(c))
-				return true;
+		int x = loc.getX();
+		int y = loc.getY();
+		List<Location> locs = new ArrayList<Location>();
+		locs.add(new Location (x+1,y));
+		locs.add(new Location (x-1, y));
+		locs.add(new Location (x, y+1));
+		locs.add(new Location (x, y-1));
+		for(Location g: locs){
+			int xn = g.getX();
+			int yn = g.getY();
+			if(onGrid(g)){
+				if(checkOccupied(g,c)){
+					if(arr[xn][yn].getColor().equals(c)){
+						return true;
+					}
+				}
+			}
 		}
 		return false;
-			
 	}
 
 	//checks if spot is occupied or off the board
 	//returns true if occupied or off board
-	public boolean checkOccupied(Location loc) {
-		if(arr[loc.getX()][loc.getY()]!=null)
+	private boolean checkOccupied(Location loc, Color c) {
+		if(onGrid(loc)){
+			if(arr[loc.getX()][loc.getY()]!=null)
+				return true;
+			else 
+				return false;
+		}
+		else
 			return true;
-		else 
-			return false;
 	
 	}
 
@@ -132,17 +158,6 @@ public class BlokusBoard {
 		if(loc.getX()> 0 && loc.getX()<=sizeOfBoard && loc.getY()>0 && loc.getY()<=sizeOfBoard)
 			return true;
 		return false;	
-	}
-
-	public Block[][] getArray(){
-		Block[][] temp = new Block[this.sizeOfBoard+2][this.sizeOfBoard+2];
-		for(int r = 1; r < sizeOfBoard+1; r++){
-			for(int c = 1; c < sizeOfBoard+1; c++){
-				temp[r][c] = arr[r][c];
-			}
-		}
-		return temp;
-		
 	}
 
 }

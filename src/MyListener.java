@@ -93,9 +93,8 @@ public class MyListener extends MouseInputAdapter implements ActionListener {
 	}
 
 	public void mouseMoved(MouseEvent e){
-		int a = Block.SIZE/2;
 		if(active){
-			panel.getSelectedPiece().follow(e.getX()-a,e.getY()-a);
+			panel.getSelectedPiece().follow(e.getX(),e.getY());
 			panel.repaint();
 		}
 	}
