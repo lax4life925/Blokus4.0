@@ -23,6 +23,7 @@ public class BlokusPanel extends JPanel{
 	JButton passButton;
 	List<Player> playerList = new ArrayList<Player>();
 	MyListener listen= new MyListener(this);
+	PlayIsPossibleTester pipt = new PlayIsPossibleTester();
 	int numPlayers = 4;
 	// true if game has begun
 	boolean playing = false;
@@ -36,6 +37,7 @@ public class BlokusPanel extends JPanel{
 	private List<String> playerNames;
 	public BlokusPanel(List<String> pn){
 		super();
+		this.setBackground(Color.WHITE);
 		playerNames = pn;
 		this.numPlayers = pn.size();
 		this.addMouseListener(listen);
@@ -76,24 +78,6 @@ public class BlokusPanel extends JPanel{
 		repaint();
 	}
 
-	private int getNumPlayersInitial() {
-		// TODO Auto-generated method stub
-		JOptionPane jop = new JOptionPane();
-		String s = jop.showInputDialog("How many players?").toString();
-		int x = 0;
-		try {x = Integer.parseInt(s);} catch (NumberFormatException e) {}
-		while(x > 4 || x < 2){
-			s = jop.showInputDialog("Please enter an number between 1 and 4. How many players?");
-			try {x = Integer.parseInt(s);} catch (NumberFormatException e) {}
-		}
-		return x;
-	}
-
-
-	private void setUpTimer() {
-		// TODO Auto-generated method stub
-
-	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 			board.draw(g);
@@ -184,6 +168,13 @@ public class BlokusPanel extends JPanel{
 		// TODO Auto-generated method stub
 		this.GameTurn++;
 		GameTurn = GameTurn%this.numPlayers;
+		/*if(pipt.canTheyPlay(this.board, this.whosturn()))
+			System.out.println(this.playerNames.get(GameTurn) + " can play.");
+		else 
+			System.out.println(this.playerNames.get(GameTurn) + " can't play.");
+			*/
+		//pipt.howManyMovesPossible(this.board, this.whosturn());
+		//pipt.playRandom(board, this.whosturn());
 	}
 	public boolean onScreen(Location loc){
 		int x = loc.getX();
