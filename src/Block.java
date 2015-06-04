@@ -10,15 +10,19 @@ public class Block {
 	private Location relativeLoc;
 	private Location screenLoc;
 	private Piece piece;
+	private boolean corner = false;
+	
 	public Block(Color c){
 		color = c;
 	}
-	public Block(Piece p, int relX, int relY) {
+	
+	public Block(Piece p, int relX, int relY, boolean c) {
 		// TODO Auto-generated constructor stub
 		piece = p;
 		color = p.getColor();
 		relativeLoc = new Location(relX,relY);
 		screenLoc = new Location(relX*Block.SIZE + p.getX(), relY*Block.SIZE + p.getY());
+		corner = c;
 	}
 
 	public Color getColor() {
@@ -42,8 +46,6 @@ public class Block {
 		return relativeLoc;
 	}
 
-
-
 	public boolean contains(int x, int y) {
 		// TODO Auto-generated method stub
 		Rectangle rect = new Rectangle(getRelativeLoc().getX()*Block.SIZE + piece.getX(),getRelativeLoc().getY()*Block.SIZE + piece.getY(),SIZE,SIZE);
@@ -57,5 +59,8 @@ public class Block {
 		screenLoc = screen;
 	}
 	
+	public boolean isCorner(){
+		return corner;
+	}
 	
 }

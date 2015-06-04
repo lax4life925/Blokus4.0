@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -10,6 +11,7 @@ import javax.swing.JTextField;
 
 public class BlokusFrame extends JFrame {
 	int playerNum = 0;
+	boolean DEBUG_MODE = true;
 	public static final int width = 1200;
 	public static final int height = 800;
 	public static  int numPlayers;
@@ -19,8 +21,19 @@ public class BlokusFrame extends JFrame {
 		setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		setBounds(0,0,width,height);
-		JOptionPane.showMessageDialog(null, "Welcome to Blokus. You will now input each player's name.");
-		setUpMenu();
+		
+		if(DEBUG_MODE){
+			List<String> names = new ArrayList<String>();
+			for(int i = 1; i <= 4; i++)
+				names.add("" + i);
+			BlokusPanel bp = new BlokusPanel(names);
+			this.add(bp);
+		}
+			
+		else{
+			JOptionPane.showMessageDialog(null, "Welcome to Blokus. You will now input each player's name.");
+			setUpMenu();
+		}
 		
 		
 	}
