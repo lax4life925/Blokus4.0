@@ -31,7 +31,7 @@
 			pieceBag.add(new Piece(p, "T5"));
 		}
 		
-		public ArrayList<Piece> getPieces(){
+		public ArrayList<Piece> getPieces(){ 
 			return pieceBag;
 		}
 	}

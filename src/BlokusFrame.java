@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 public class BlokusFrame extends JFrame {
 	int playerNum = 0;
-	boolean DEBUG_MODE = true;
+	boolean DEBUG_MODE = false;
 	public static final int width = 1200;
 	public static final int height = 800;
 	public static  int numPlayers;

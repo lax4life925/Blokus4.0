@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 
@@ -25,6 +27,7 @@ private JButton done;
 private List<String> playerNames;
 private int numPlayers = 0;
 private BlokusFrame blokF;
+int numberOfCPU = 0;
 	public BlokusMenu(BlokusFrame bf){
 		super();
 		this.setPreferredSize(new Dimension(500,500));
@@ -43,13 +46,7 @@ private BlokusFrame blokF;
 		enter.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				playerNames.add(jtf.getText());
-				numPlayers++;
-				if(numPlayers == 4){
-					doneAddingPlayers();
-				}
-				else
-					repaint();
+				addPlayer(jtf.getText());
 			}
 		});
 		
@@ -67,6 +64,20 @@ private BlokusFrame blokF;
 			}
 			
 		});
+		JButton addAI = new JButton();
+		addAI.setText("Add easy AI");
+		addAI.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Aputo-generated method stub
+				numberOfCPU++;
+				addPlayer("CPU " + numberOfCPU);
+			}
+
+			
+		});
+		this.add(addAI);
 		this.add(enter,0);
 		this.add(jtf,1);
 		this.add(done,2);
@@ -84,6 +95,14 @@ private BlokusFrame blokF;
 			str+= ((a+1) + " : " + this.playerNames.get(a));
 			g.drawString(str, 20, 50+20*(a+1));
 		}
+	}
+	private void addPlayer(String string) {
+		// TODO Auto-generated method stub
+		this.playerNames.add(string);
+		if(playerNames.size() == 4)
+			doneAddingPlayers();
+		else
+			repaint();
 	}
 
 }

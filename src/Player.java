@@ -13,9 +13,10 @@ public class Player {
 	private List<Piece> usablePieces;
 	private boolean firstMove = true;
 	private boolean playedSingleLast = false;
-	
+	private boolean cpu = false;
 	private Location startingLoc;
 	private static Location[] startingLocations = {new Location(1,20),new Location(1,1),new Location(20,1),new Location(20,20)};
+	boolean canPlay = true;
 	//player blue's turn = 0
 	//player yellow's turn = 1
 	//player red's turn = 2
@@ -36,7 +37,7 @@ public class Player {
 	case 3: startingLoc = new Location(20,20);
 			break;
 	 */
-	public Player(Color c, int t, int nP) {
+	public Player(Color c, int t, int numP) {
 		// TODO Auto-generated constructor stub
 		usablePieces = new ArrayList<Piece>();
 		turn = t;
@@ -103,4 +104,21 @@ public class Player {
 		return true;
 	}
 
+	public boolean isCPU() {
+		// TODO Auto-generated method stub
+		return cpu;
+	}
+
+	public void setAsCPU() {
+		// TODO Auto-generated method stub
+		cpu = true;
+	}
+
+	public void cannotPlay() {
+		// TODO Auto-generated method stub
+		canPlay = false;
+	}
+	public boolean canPlay(){
+		return canPlay;
+	}
 }

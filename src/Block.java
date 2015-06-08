@@ -39,7 +39,7 @@ public class Block {
 	}
 	
 	public Location getScreenLoc(){
-		return screenLoc;
+		return new Location(getRelativeLoc().getX()*Block.SIZE + piece.getX(),getRelativeLoc().getY()*Block.SIZE + piece.getY());
 	}
 	
 	public Location getRelativeLoc(){

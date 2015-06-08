@@ -23,8 +23,10 @@ public class BlokusPanel extends JPanel{
 	JButton passButton;
 	List<Player> playerList = new ArrayList<Player>();
 	MyListener listen= new MyListener(this);
-	PlayIsPossibleTester pipt = new PlayIsPossibleTester();
+	ArtificialIntelligence ai = new ArtificialIntelligence();
 	int numPlayers = 4;
+	List<Player> cantPlayAnymore = new ArrayList<Player>();
+	private boolean gameOver;
 	// true if game has begun
 	boolean playing = false;
 	Color[] colors = {Color.blue,Color.yellow,Color.red,Color.green};
@@ -74,6 +76,8 @@ public class BlokusPanel extends JPanel{
 		//numPlayers = getNumPlayersInitial();
 		for(int i = 0; i < numPlayers;i++){
 			playerList.add(new Player(colors[i], i, numPlayers));
+			if(this.playerNames.get(i).contains("CPU"))
+				playerList.get(i).setAsCPU();
 		}
 		repaint();
 	}
@@ -168,13 +172,27 @@ public class BlokusPanel extends JPanel{
 		// TODO Auto-generated method stub
 		this.GameTurn++;
 		GameTurn = GameTurn%this.numPlayers;
-		/*if(pipt.canTheyPlay(this.board, this.whosturn()))
-			System.out.println(this.playerNames.get(GameTurn) + " can play.");
-		else 
-			System.out.println(this.playerNames.get(GameTurn) + " can't play.");
-			*/
-		//pipt.howManyMovesPossible(this.board, this.whosturn());
-		//pipt.playRandom(board, this.whosturn());
+		Player current = whosturn();
+		//ai.howManyMovesPossible(this.board, current);
+		if(!current.canPlay()){
+			if(!this.cantPlayAnymore.contains(current))
+				this.cantPlayAnymore.add(current);
+			if(this.cantPlayAnymore.size() >= this.numPlayers)
+				gameOver();
+			else
+				nextTurn();
+		}
+		else if(current.isCPU()){
+				//System.out.println(current.isCPU());
+				//ai.playRandom(board, current);
+				ai.playPrioritizeBlocking(board, current, playerList);
+				nextTurn();
+			}
+	}
+	private void gameOver() {
+		// TODO Auto-generated method stub
+		this.gameOver = true;
+		//System.out.print("Game over!");
 	}
 	public boolean onScreen(Location loc){
 		int x = loc.getX();
