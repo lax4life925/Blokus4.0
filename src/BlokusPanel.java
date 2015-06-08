@@ -56,17 +56,17 @@ public class BlokusPanel extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				pass();
-				
+
 			}
-			
+
 		});
 		this.add(passButton);
 		//setUpTimer();
-		
+
 		setUpPlayers();
 		//test();
 		//testForPieceFlip();
-		
+
 	}
 	private int getNumPlayers(){
 		return numPlayers;
@@ -84,20 +84,32 @@ public class BlokusPanel extends JPanel{
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-			board.draw(g);
-			//passB.draw(g);
-			Player myTurn = whosturn();
-			
-			g.drawString(this.playerNames.get(GameTurn) + "'s Score: " + myTurn.getScore(), 25, 100);
-			if(whosturn() != null){
-				for(Piece p : whosturn().getAvailablePieces()){
-					p.draw(g);
-				}	
+		board.draw(g);
+		//passB.draw(g);
+		Player myTurn = whosturn();
+		for(int i=0; i<this.getNumPlayers();i++){
+			if(myTurn.equals(playerList.get(i))){
+				Color c = this.playerList.get(i).getColor();
+				if(c.equals(Color.yellow)){
+					c = Color.magenta;
+				}
+				g.setColor(c);
 			}
+			else{
+				g.setColor(Color.black);
+			}
+			g.drawString(this.playerNames.get(i) + "'s Score: " + this.playerList.get(i).getScore(), 20, 25 +25*i);
+		}
+		//g.drawString(this.playerNames.get(GameTurn) + "'s Score: " + myTurn.getScore(), 25, 100);
+		if(whosturn() != null){
+			for(Piece p : whosturn().getAvailablePieces()){
+				p.draw(g);
+			}	
+		}
 	}
-	
 
-	
+
+
 	public Player whosturn(){
 		for(Player z: this.playerList){
 			if(z.getTurn()==GameTurn){
@@ -205,15 +217,15 @@ public class BlokusPanel extends JPanel{
 	}
 	public void pass() {
 		// TODO Auto-generated method stub
-		
-			nextTurn();
-			firstClick = null;
-			selectedP = null;
-			selectedB = null;
-			repaint();
-		
+
+		nextTurn();
+		firstClick = null;
+		selectedP = null;
+		selectedB = null;
+		repaint();
+
 	}
-	
+
 
 
 

@@ -32,6 +32,7 @@ public class Piece {
 				blockList.add(new Block(this, 1, 0,true));
 				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
 				y=BlokusFrame.height-150;
+				og = new Location(x,y);
 		 	}
 			if (type == "T4"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -40,7 +41,11 @@ public class Piece {
 				blockList.add(new Block(this, 2, 0,true));
 				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
 				y=BlokusFrame.height-475;
+<<<<<<< HEAD
 				flippingMatters = false;
+=======
+				og = new Location(x,y);
+>>>>>>> origin/master
 			}
 			if (type == "Square"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -49,7 +54,11 @@ public class Piece {
 				blockList.add(new Block(this, 0, -1,true));
 				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
 				y=BlokusFrame.height-550;
+<<<<<<< HEAD
 				flippingMatters = false;
+=======
+				og = new Location(x,y);
+>>>>>>> origin/master
 			}
 			if (type == "ThreeLong"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -57,7 +66,11 @@ public class Piece {
 				blockList.add(new Block(this, 2, 0,true));
 				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
 				y=BlokusFrame.height-200;
+<<<<<<< HEAD
 				flippingMatters = false;
+=======
+				og = new Location(x,y);
+>>>>>>> origin/master
 			}
 			if (type == "FourLong"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -66,20 +79,32 @@ public class Piece {
 				blockList.add(new Block(this, 3, 0,true));
 				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
 				y=BlokusFrame.height-250;
+<<<<<<< HEAD
 				flippingMatters = false;
+=======
+				og = new Location(x,y);
+>>>>>>> origin/master
 			}
 			if (type == "OneLong"){
 				blockList.add(new Block(this, 0, 0,true));
 				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
 				y=BlokusFrame.height-300;
+<<<<<<< HEAD
 				flippingMatters = false;
+=======
+				og = new Location(x,y);
+>>>>>>> origin/master
 			}
 			if (type == "TwoLong"){
 				blockList.add(new Block(this, 0, 0,true));
 				blockList.add(new Block(this, 1, 0,true));
 				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
 				y=BlokusFrame.height-350;
+<<<<<<< HEAD
 				flippingMatters = false;
+=======
+				og = new Location(x,y);
+>>>>>>> origin/master
 			}
 			if (type == "L4"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -88,6 +113,7 @@ public class Piece {
 				blockList.add(new Block(this, 2, 0,true));
 				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
 				y=BlokusFrame.height-400;
+				og = new Location(x,y);
 			}
 			if (type == "Z4"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -96,6 +122,7 @@ public class Piece {
 				blockList.add(new Block(this, 2, -1,true));
 				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
 				y=BlokusFrame.height-625;
+				og = new Location(x,y);
 			}
 			if (type == "FiveLong"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -105,7 +132,11 @@ public class Piece {
 				blockList.add(new Block(this, 4, 0,true));
 				x=BlokusFrame.width-(BlokusFrame.width*2/7);
 				y=BlokusFrame.height-120;
+<<<<<<< HEAD
 				flippingMatters = false;
+=======
+				og = new Location(x,y);
+>>>>>>> origin/master
 			}
 			if (type == "L5"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -115,6 +146,7 @@ public class Piece {
 				blockList.add(new Block(this, 0, -1,true));
 				x=BlokusFrame.width-(BlokusFrame.width*2/7);
 				y=BlokusFrame.height-170;
+				og = new Location(x,y);
 			}
 			if (type == "U"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -124,7 +156,11 @@ public class Piece {
 				blockList.add(new Block(this, 2, 0,true));
 				x=BlokusFrame.width-(BlokusFrame.width*2/7);
 				y=BlokusFrame.height-410;
+<<<<<<< HEAD
 				flippingMatters = false;
+=======
+				og = new Location(x,y);
+>>>>>>> origin/master
 			}
 			if (type == "F"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -134,6 +170,7 @@ public class Piece {
 				blockList.add(new Block(this, 2, -1,true));
 				x=BlokusFrame.width-(BlokusFrame.width*2/15);
 				y=BlokusFrame.height-230;
+				og = new Location(x,y);
 			}
 			if (type == "P"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -143,6 +180,7 @@ public class Piece {
 				blockList.add(new Block(this, 1, -1,true));
 				x=BlokusFrame.width-(BlokusFrame.width*2/7);
 				y=BlokusFrame.height-330;
+				og = new Location(x,y);
 			}
 			if (type == "V5"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -152,6 +190,7 @@ public class Piece {
 				blockList.add(new Block(this, 2, 0,true));
 				x=BlokusFrame.width-(BlokusFrame.width*2/7);
 				y=BlokusFrame.height-680;
+				og = new Location(x,y);
 			}
 			if (type == "W"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -161,6 +200,7 @@ public class Piece {
 				blockList.add(new Block(this, 2, -2,true));
 				x=BlokusFrame.width-((BlokusFrame.width*2)/5);
 				y=BlokusFrame.height-700;
+				og = new Location(x,y);
 			}
 			if (type == "Y"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -170,6 +210,7 @@ public class Piece {
 				blockList.add(new Block(this, 3, 0,true));
 				x=BlokusFrame.width-(BlokusFrame.width*2/7);
 				y=BlokusFrame.height-490;
+				og = new Location(x,y);
 			}
 			if (type == "N"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -179,6 +220,7 @@ public class Piece {
 				blockList.add(new Block(this, 3, -1,true));
 				x=BlokusFrame.width-(BlokusFrame.width*2/7);
 				y=BlokusFrame.height-250;
+				og = new Location(x,y);
 			}
 			if (type == "X"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -188,6 +230,7 @@ public class Piece {
 				blockList.add(new Block(this, 1, 0,false));
 				x=BlokusFrame.width-(BlokusFrame.width*2/15);
 				y=BlokusFrame.height-370;
+				og = new Location(x,y);
 			}
 			if (type == "Z5"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -197,6 +240,7 @@ public class Piece {
 				blockList.add(new Block(this, 2, -2,true));
 				x=BlokusFrame.width-(BlokusFrame.width*2/15);
 				y=BlokusFrame.height-120;
+				og = new Location(x,y);
 			}
 			if (type == "T5"){
 				blockList.add(new Block(this, 0, 0,true));
@@ -206,6 +250,7 @@ public class Piece {
 				blockList.add(new Block(this, 2, -1,true));
 				x=BlokusFrame.width-(BlokusFrame.width*2/7);
 				y=BlokusFrame.height-570;
+				og = new Location(x,y);
 			}
 			for(Block b: blockList){
 				if(b.isCorner()){
