@@ -72,12 +72,21 @@ int numberOfCPU = 0;
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Aputo-generated method stub
 				numberOfCPU++;
-				addPlayer("CPU " + numberOfCPU);
+				addPlayer("EASY CPU " + numberOfCPU);
 			}
-
+		
 			
 		});
+		JButton addBlockingAI = new JButton();
+		addBlockingAI.setText("Add hard AI");
+		addBlockingAI.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent a){
+				numberOfCPU++;
+				addPlayer("HARD CPU " + numberOfCPU);
+			}
+		});
 		this.add(addAI);
+		this.add(addBlockingAI);
 		this.add(enter,0);
 		this.add(jtf,1);
 		this.add(done,2);

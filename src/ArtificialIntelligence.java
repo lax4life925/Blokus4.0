@@ -28,10 +28,12 @@ public class ArtificialIntelligence {
 		System.out.println("Blocking moves = " + blockingMoves.size());
 		if(blockingMoves.size() > 0){
 			Collections.shuffle(blockingMoves);
+			Collections.sort(blockingMoves);
 			toPlay = blockingMoves.get(0);
 		}
 		else{
 			Collections.shuffle(possiblePlays);
+			Collections.sort(possiblePlays);
 			if(possiblePlays.size() > 0)
 				toPlay = possiblePlays.get(0);
 			else p.cannotPlay();
@@ -48,6 +50,7 @@ public class ArtificialIntelligence {
 		}
 		
 		Collections.shuffle(possiblePlays);
+		Collections.sort(possiblePlays);
 		Piece toPlay = possiblePlays.get(0);
 		playPiece(toPlay);
 		
@@ -67,8 +70,6 @@ public class ArtificialIntelligence {
 	}
 	public void howManyMovesPossible(BlokusBoard b,Player p){
 		possiblePlays = new ArrayList<Piece>();
-		
-			
 		player = p;
 		board = b;
 		arr = b.getArray();
@@ -77,8 +78,6 @@ public class ArtificialIntelligence {
 		List<Location> corners = getCorners(p);
 		if(p.firstMove())
 			corners.add(p.getStartingLocation());
-				
-		//System.out.println("How many corners available " + corners.size());
 		for(Location corn : corners){
 			for(Piece piece : player.getAvailablePieces()){
 				Piece pieceToCheck = piece.cloneSelf();

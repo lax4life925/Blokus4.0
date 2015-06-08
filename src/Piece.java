@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.JComponent;
 
 
-public class Piece {
+public class Piece implements Comparable{
 	List<Block> blockList = new ArrayList<Block>();
 	List<Block> cornerList = new ArrayList<Block>();
 	 Color color;
@@ -349,5 +349,12 @@ public class Piece {
 		}
 		temp.follow(this.getX(), this.getY());
 		return temp;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		Piece p = (Piece) o;
+		return p.getBlockList().size() - getBlockList().size();
 	}
 }

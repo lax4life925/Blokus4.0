@@ -19,7 +19,6 @@ public class BlokusPanel extends JPanel{
 	Location firstClick;
 	Piece selectedP;
 	Block selectedB;
-	PassButton passB;
 	JButton passButton;
 	List<Player> playerList = new ArrayList<Player>();
 	MyListener listen= new MyListener(this);
@@ -194,12 +193,28 @@ public class BlokusPanel extends JPanel{
 			else
 				nextTurn();
 		}
-		else if(current.isCPU()){
+		else if(this.playerNames.get(GameTurn).contains("EASY CPU")){
 				//System.out.println(current.isCPU());
 				//ai.playRandom(board, current);
 				ai.playPrioritizeBlocking(board, current, playerList);
 				nextTurn();
 			}
+		else if(this.playerNames.get(GameTurn).contains("HARD CPU")){
+			//System.out.println(current.isCPU());
+			//ai.playRandom(board, current);
+			ai.playPrioritizeBlocking(board, current, playerList);
+			nextTurn();
+		}
+		
+		else if(this.playerNames.get(GameTurn).contains("RANDOM CPU")){
+			//System.out.println(current.isCPU());
+			//ai.playRandom(board, current);
+			//ai.playPrioritizeBlocking(board, current, playerList);
+			ai.playRandom(this.board, current);
+			nextTurn();
+		}
+		
+		
 	}
 	private void gameOver() {
 		// TODO Auto-generated method stub

@@ -24,8 +24,10 @@ public class BlokusFrame extends JFrame {
 		
 		if(DEBUG_MODE){
 			List<String> names = new ArrayList<String>();
-			for(int i = 1; i <= 4; i++)
-				names.add("" + i);
+			for(int i = 1; i <= 2; i++)
+				names.add("BLOCKING CPU" + i);
+			for(int i = 1; i <=2; i++)
+				names.add("RANDOM CPU" + i);
 			BlokusPanel bp = new BlokusPanel(names);
 			this.add(bp);
 		}
