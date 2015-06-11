@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +26,7 @@ public class ArtificialIntelligence {
 					}
 		
 		Piece toPlay = null;
-		System.out.println("Blocking moves = " + blockingMoves.size());
+		//System.out.println("Blocking moves = " + blockingMoves.size());
 		if(blockingMoves.size() > 0){
 			Collections.shuffle(blockingMoves);
 			Collections.sort(blockingMoves);
@@ -68,7 +69,7 @@ public class ArtificialIntelligence {
 				board.add(bo);
 		}
 	}
-	public void howManyMovesPossible(BlokusBoard b,Player p){
+	public int howManyMovesPossible(BlokusBoard b,Player p){
 		possiblePlays = new ArrayList<Piece>();
 		player = p;
 		board = b;
@@ -106,7 +107,7 @@ public class ArtificialIntelligence {
 				}
 			}
 		}
-		
+		return totalmoves;
 		//System.out.println("Total moves possible = " + totalmoves);
 	}
 	
@@ -118,9 +119,16 @@ public class ArtificialIntelligence {
 			return true;
 		List<Location> corners = getCorners(p);
 		for(Location corn : corners){
-			System.out.println("Checking corner (" + corn.getX() + "," + corn.getY() + ")");
-			if(canPlayOnCorner(corn))
+			if(p.getColor().equals(Color.green)){
+				
+			}
+			//System.out.println("Checking corner (" + corn.getX() + "," + corn.getY() + ")");
+			if(canPlayOnCorner(corn)){
+				if(p.getColor().equals(Color.green)){
+					System.out.println("Yeah!!!!");
+				}
 				return true;
+			}
 		}
 		
 		return false;
@@ -130,9 +138,14 @@ public class ArtificialIntelligence {
 	private boolean canPlayOnCorner(Location loc) {
 		// TODO Auto-generated method stub
 		for(Piece piece : player.getAvailablePieces()){
-			System.out.println("Checking Piece: " + piece.type);
-			if(pieceWorksOnCorner(piece,loc))
+			//System.out.println("Checking Piece: " + piece.type);
+
+			if(pieceWorksOnCorner(piece,loc)){
+				if(player.getColor().equals(Color.green)){
+					System.out.println("Yeah!");
+				}
 				return true;
+			}
 		}
 			return false;
 	}
@@ -143,7 +156,7 @@ public class ArtificialIntelligence {
 		Piece p = piece.cloneSelf();
 		
 		for(Block b : p.getCornerList()){
-			System.out.println("Checking piece corner: " + i);
+			//System.out.println("Checking piece corner: " + i);
 			p.setBlockAsOrigin(b);
 			Location screenLoc = loc.toScreen();
 			p.follow(screenLoc.getX()+Block.SIZE/2, screenLoc.getY()+Block.SIZE/2);
@@ -151,7 +164,7 @@ public class ArtificialIntelligence {
 				if(this.board.validPlay(p))
 					return true;
 				else{
-					System.out.println("Rotating");
+					//System.out.println("Rotating");
 					p.rotate();
 				}
 				}

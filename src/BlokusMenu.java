@@ -102,7 +102,7 @@ int numberOfCPU = 0;
 		for(int a = 0; a < this.playerNames.size();a++){
 			String str = "Player ";
 			str+= ((a+1) + " : " + this.playerNames.get(a));
-			g.drawString(str, 20, 50+20*(a+1));
+			g.drawString(str, 20, 60+30*(a+1));
 		}
 	}
 	private void addPlayer(String string) {
